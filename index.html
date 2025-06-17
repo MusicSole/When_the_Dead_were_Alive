@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +26,7 @@
       margin-bottom: 30px;
     }
 
-    .dropdowns select {
+    .dropdowns select, #songSearch {
       padding: 10px;
       font-size: 16px;
       margin: 10px;
@@ -37,6 +36,11 @@
 
     .dropdowns {
       margin-top: 30px;
+    }
+
+    #songSearch {
+      width: 60%;
+      max-width: 400px;
     }
 
     button {
@@ -91,6 +95,12 @@
 
   <button onclick="goToSetlist()">View Setlist</button>
 
+  <div style="margin-top: 40px;">
+    <input type="text" id="songSearch" placeholder="Search for a song..." onkeypress="handleKeyPress(event)">
+    <br>
+    <button onclick="searchSong()">Search Song</button>
+  </div>
+
   <script>
     function goToSetlist() {
       const month = document.getElementById('month').value;
@@ -103,6 +113,21 @@
         window.location.href = `./setlists/${year}-${paddedMonth}-${paddedDay}.html`;
       } else {
         alert('Please select a full date!');
+      }
+    }
+
+    function searchSong() {
+      const query = document.getElementById('songSearch').value.trim().toLowerCase();
+      if (query) {
+        window.location.href = `./songs/${encodeURIComponent(query)}.html`;
+      } else {
+        alert('Please enter a song title!');
+      }
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        searchSong();
       }
     }
   </script>
