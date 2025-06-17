@@ -1,1 +1,110 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>When the Dead Were Alive</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+    }
+
+    .logo {
+      font-family: Garamond, serif;
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ff4136;
+    }
+
+    .subheading {
+      font-style: italic;
+      font-size: 1.3em;
+      margin-bottom: 30px;
+    }
+
+    .dropdowns select {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .dropdowns {
+      margin-top: 30px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #ff4136;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #e62e2e;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">When the Dead Were Alive</div>
+  <div class="subheading">Explore Grateful Dead setlists from 1965 to 1995</div>
+
+  <div class="dropdowns">
+    <select id="month">
+      <option value="">Month</option>
+      <script>
+        const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        months.forEach((month, i) => {
+          document.write(`<option value="${i + 1}">${month}</option>`);
+        });
+      </script>
+    </select>
+
+    <select id="day">
+      <option value="">Day</option>
+      <script>
+        for (let d = 1; d <= 31; d++) {
+          document.write(`<option value="${d}">${d}</option>`);
+        }
+      </script>
+    </select>
+
+    <select id="year">
+      <option value="">Year</option>
+      <script>
+        for (let y = 1965; y <= 1995; y++) {
+          document.write(`<option value="${y}">${y}</option>`);
+        }
+      </script>
+    </select>
+  </div>
+
+  <button onclick="goToSetlist()">View Setlist</button>
+
+  <script>
+    function goToSetlist() {
+      const month = document.getElementById('month').value;
+      const day = document.getElementById('day').value;
+      const year = document.getElementById('year').value;
+
+      if (month && day && year) {
+        const paddedMonth = month.toString().padStart(2, '0');
+        const paddedDay = day.toString().padStart(2, '0');
+        window.location.href = `./setlists/${year}-${paddedMonth}-${paddedDay}.html`;
+      } else {
+        alert('Please select a full date!');
+      }
+    }
+  </script>
+</body>
+</html>
